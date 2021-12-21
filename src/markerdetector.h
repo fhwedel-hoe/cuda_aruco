@@ -91,7 +91,7 @@ class ARUCO_EXPORTS MarkerDetector {
      * @param setYPerperdicular If set the Y axis will be perpendicular to the surface. Otherwise, it will be the Z axis
      */
     void detect(const cv::Mat &input, std::vector< Marker > &detectedMarkers, cv::Mat camMatrix = cv::Mat(), cv::Mat distCoeff = cv::Mat(),
-                float markerSizeMeters = -1, bool setYPerperdicular = false) throw(cv::Exception);
+                float markerSizeMeters = -1, bool setYPerperdicular = false);
     /**Detects the markers in the image passed
      *
      * If you provide information about the camera parameters and the size of the marker, then, the extrinsics of the markers are detected
@@ -103,7 +103,7 @@ class ARUCO_EXPORTS MarkerDetector {
      * @param setYPerperdicular If set the Y axis will be perpendicular to the surface. Otherwise, it will be the Z axis
      */
     void detect(const cv::Mat &input, std::vector< Marker > &detectedMarkers, CameraParameters camParams, float markerSizeMeters = -1,
-                bool setYPerperdicular = false) throw(cv::Exception);
+                bool setYPerperdicular = false);
 
     /**This set the type of thresholding methods available
      */
@@ -181,7 +181,7 @@ class ARUCO_EXPORTS MarkerDetector {
      * @param max size of the contour to consider a possible marker as valid [0,1)
      *
      */
-    void setMinMaxSize(float min = 0.03, float max = 0.5) throw(cv::Exception);
+    void setMinMaxSize(float min = 0.03, float max = 0.5);
 
     /**reads the min and max sizes employed
      * @param min output size of the contour to consider a possible marker as valid (0,1]
@@ -220,7 +220,7 @@ class ARUCO_EXPORTS MarkerDetector {
      * Specifies the size for the canonical marker image. A big value makes the detection slower than a small value.
      * Minimun value is 10. Default value is 56.
      */
-    void setWarpSize(int val) throw(cv::Exception);
+    void setWarpSize(int val);
     ;
     /**
      */
@@ -262,7 +262,7 @@ class ARUCO_EXPORTS MarkerDetector {
     /**
      * Thesholds the passed image with the specified method.
      */
-    void thresHold(int method, const cv::Mat &grey, cv::Mat &thresImg, double param1 = -1, double param2 = -1) throw(cv::Exception);
+    void thresHold(int method, const cv::Mat &grey, cv::Mat &thresImg, double param1 = -1, double param2 = -1);
     /**
     * Detection of candidates to be markers, i.e., rectangles.
     * This function returns in candidates all the rectangles found in a thresolded image
@@ -280,7 +280,7 @@ class ARUCO_EXPORTS MarkerDetector {
      * @param points 4 corners of the marker in the image in
      * @return true if the operation succeed
      */
-    bool warp(cv::Mat &in, cv::Mat &out, cv::Size size, std::vector< cv::Point2f > points) throw(cv::Exception);
+    bool warp(cv::Mat &in, cv::Mat &out, cv::Size size, std::vector< cv::Point2f > points);
 
 
 
@@ -305,10 +305,10 @@ class ARUCO_EXPORTS MarkerDetector {
      *of glDrawPixels: bottom-to-top.
      */
     static void glGetProjectionMatrix(CameraParameters &CamMatrix, cv::Size orgImgSize, cv::Size size, double proj_matrix[16], double gnear, double gfar,
-                                      bool invert = false) throw(cv::Exception);
+                                      bool invert = false);
 
   private:
-    bool warp_cylinder(cv::Mat &in, cv::Mat &out, cv::Size size, MarkerCandidate &mc) throw(cv::Exception);
+    bool warp_cylinder(cv::Mat &in, cv::Mat &out, cv::Size size, MarkerCandidate &mc);
     /**
     * Detection of candidates to be markers, i.e., rectangles.
     * This function returns in candidates all the rectangles found in a thresolded image

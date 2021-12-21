@@ -70,7 +70,7 @@ Marker::Marker(const std::vector< cv::Point2f > &corners, int _id) : std::vector
 /**
  *
 */
-void Marker::glGetModelViewMatrix(double modelview_matrix[16]) throw(cv::Exception) {
+void Marker::glGetModelViewMatrix(double modelview_matrix[16]) {
     // check if paremeters are valid
     bool invalid = false;
     for (int i = 0; i < 3 && !invalid; i++) {
@@ -125,7 +125,7 @@ void Marker::glGetModelViewMatrix(double modelview_matrix[16]) throw(cv::Excepti
 /****
  *
  */
-void Marker::OgreGetPoseParameters(double position[3], double orientation[4]) throw(cv::Exception) {
+void Marker::OgreGetPoseParameters(double position[3], double orientation[4]) {
 
     // check if paremeters are valid
     bool invalid = false;
@@ -239,7 +239,7 @@ void Marker::draw(Mat &in, Scalar color, int lineWidth, bool writeId) const {
 
 /**
  */
-void Marker::calculateExtrinsics(float markerSize, const CameraParameters &CP, bool setYPerpendicular) throw(cv::Exception) {
+void Marker::calculateExtrinsics(float markerSize, const CameraParameters &CP, bool setYPerpendicular) {
     if (!CP.isValid())
         throw cv::Exception(9004, "!CP.isValid(): invalid camera parameters. It is not possible to calculate extrinsics", "calculateExtrinsics", __FILE__,
                             __LINE__);
@@ -249,7 +249,7 @@ void Marker::calculateExtrinsics(float markerSize, const CameraParameters &CP, b
 void print(cv::Point3f p, string cad) { cout << cad << " " << p.x << " " << p.y << " " << p.z << endl; }
 /**
  */
-void Marker::calculateExtrinsics(float markerSizeMeters, cv::Mat camMatrix, cv::Mat distCoeff, bool setYPerpendicular) throw(cv::Exception) {
+void Marker::calculateExtrinsics(float markerSizeMeters, cv::Mat camMatrix, cv::Mat distCoeff, bool setYPerpendicular) {
     if (!isValid())
         throw cv::Exception(9004, "!isValid(): invalid marker. It is not possible to calculate extrinsics", "calculateExtrinsics", __FILE__, __LINE__);
     if (markerSizeMeters <= 0)
