@@ -68,7 +68,7 @@ Mat FiducidalMarkers::createMarkerImage(int id, int size, bool addWaterMark, boo
         sprintf(idcad, "#%d", id);
         float ax = float(size) / 100.;
         int linew = 1 + (marker.rows / 500);
-        cv::putText(marker, idcad, cv::Point(0, marker.rows - marker.rows / 40), cv::FONT_HERSHEY_COMPLEX, ax * 0.15f, cv::Scalar::all(30), linew, CV_AA);
+        cv::putText(marker, idcad, cv::Point(0, marker.rows - marker.rows / 40), cv::FONT_HERSHEY_COMPLEX, ax * 0.15f, cv::Scalar::all(30), linew, cv::LINE_AA);
     }
 
 
@@ -455,7 +455,7 @@ int FiducidalMarkers::detect(const Mat &in, int &nRotations) {
     if (in.type() == CV_8UC1)
         grey = in;
     else
-        cv::cvtColor(in, grey, CV_BGR2GRAY);
+        cv::cvtColor(in, grey, cv::COLOR_BGR2GRAY);
     // threshold image
     threshold(grey, grey, 125, 255, THRESH_BINARY | THRESH_OTSU);
 

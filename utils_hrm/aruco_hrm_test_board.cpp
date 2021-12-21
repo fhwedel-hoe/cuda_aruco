@@ -69,7 +69,7 @@ int waitTime = 10;
 void getHueImg(const cv::Mat &rgbImg, cv::Mat &hImg) {
     cv::Mat hsvImg;
     vector< cv::Mat > hsvImg_channels;
-    cvtColor(rgbImg, hsvImg, CV_BGR2HSV);
+    cvtColor(rgbImg, hsvImg, cv::COLOR_BGR2HSV);
     cv::split(hsvImg, hsvImg_channels);
     hsvImg_channels[0].copyTo(hImg);
 }
@@ -181,7 +181,7 @@ int main(int argc, char **argv) {
 
         // Open outputvideo
         if (TheOutVideoFilePath != "")
-            VWriter.open(TheOutVideoFilePath, CV_FOURCC('M', 'J', 'P', 'G'), 30, TheDistInputImage.size());
+            VWriter.open(TheOutVideoFilePath, VideoWriter::fourcc('M', 'J', 'P', 'G'), 30, TheDistInputImage.size());
 
         // read camera parameters if passed
         if (TheIntrinsicFile != "") {
@@ -291,9 +291,9 @@ int main(int argc, char **argv) {
                 // first create a small version of the mask image
                 if (TheChromaticMask.isValid()) {
                     cv::Mat smallMask;
-                    cv::resize(TheChromaticMask.getMask() * 255, smallMask, cvSize(TheInputImageCopy.cols / 3, TheInputImageCopy.rows / 3));
+                    cv::resize(TheChromaticMask.getMask() * 255, smallMask, cv::Size(TheInputImageCopy.cols / 3, TheInputImageCopy.rows / 3));
                     cv::Mat small3C;
-                    cv::cvtColor(smallMask, small3C, CV_GRAY2BGR);
+                    cv::cvtColor(smallMask, small3C, cv::COLOR_GRAY2BGR);
                     cv::Mat roi = TheInputImageCopy(cv::Rect(0, 0, TheInputImageCopy.cols / 3, TheInputImageCopy.rows / 3));
                     small3C.copyTo(roi);
                 }

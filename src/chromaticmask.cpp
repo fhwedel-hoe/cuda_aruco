@@ -355,7 +355,7 @@ void ChromaticMask::classify(const cv::Mat &in, const aruco::Board &board) {
     // apply closing to mask
     cv::Mat maskClose;
     cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3));
-    cv::morphologyEx(_mask, maskClose, CV_MOP_CLOSE, element);
+    cv::morphologyEx(_mask, maskClose, cv::MORPH_CLOSE, element);
     _mask = maskClose;
 }
 
@@ -437,7 +437,7 @@ void ChromaticMask::classify2(const cv::Mat &in, const aruco::Board &board) {
     //     // apply closing to mask
     // _mask=_maskAux;
     cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3));
-    cv::morphologyEx(_maskAux, _mask, CV_MOP_CLOSE, element);
+    cv::morphologyEx(_maskAux, _mask, cv::MORPH_CLOSE, element);
 }
 
 

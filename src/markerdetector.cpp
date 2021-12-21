@@ -149,7 +149,7 @@ void MarkerDetector::enableLockedCornersMethod(bool enable) {
 
     // it must be a 3 channel image
     if (input.type() == CV_8UC3)
-        cv::cvtColor(input, grey, CV_BGR2GRAY);
+        cv::cvtColor(input, grey, cv::COLOR_BGR2GRAY);
     else
         grey = input;
     double t1 = cv::getTickCount();
@@ -263,7 +263,7 @@ void MarkerDetector::enableLockedCornersMethod(bool enable) {
         if (_cornerMethod == HARRIS)
             findBestCornerInRegion_harris(grey, Corners, 7);
         else if (_cornerMethod == SUBPIX) {
-            cornerSubPix(grey, Corners, cvSize(_thresParam1, _thresParam1), cvSize(-1, -1), cvTermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 8, 0.005));
+            cornerSubPix(grey, Corners, cv::Size(_thresParam1, _thresParam1), cv::Size(-1, -1), cv::TermCriteria(cv::TermCriteria::MAX_ITER |  cv::TermCriteria::EPS, 8, 0.005));
         }
         // copy back
         for (unsigned int i = 0; i < detectedMarkers.size(); i++)
@@ -354,7 +354,7 @@ void MarkerDetector::detectRectangles(vector< cv::Mat > &thresImgv, vector< Mark
         std::vector< std::vector< cv::Point > > contours2;
         cv::Mat thres2;
         thresImgv[i].copyTo(thres2);
-        cv::findContours(thres2, contours2, hierarchy2, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+        cv::findContours(thres2, contours2, hierarchy2, cv::RETR_LIST, cv::CHAIN_APPROX_NONE);
 
 
         vector< Point > approxCurve;
@@ -499,7 +499,7 @@ void MarkerDetector::thresHold(int method, const Mat &grey, Mat &out, double par
         throw cv::Exception(9001, "grey.type()!=CV_8UC1", "MarkerDetector::thresHold", __FILE__, __LINE__);
     switch (method) {
     case FIXED_THRES:
-        cv::threshold(grey, out, param1, 255, CV_THRESH_BINARY_INV);
+        cv::threshold(grey, out, param1, 255, cv::THRESH_BINARY_INV);
         break;
     case ADPT_THRES: // currently, this is the best method
         // ensure that _thresParam1%2==1
@@ -1029,10 +1029,10 @@ void MarkerDetector::drawApproxCurve(Mat &in, vector< Point > &contour, Scalar c
 
 void MarkerDetector::draw(Mat out, const vector< Marker > &markers) {
     for (unsigned int i = 0; i < markers.size(); i++) {
-        cv::line(out, markers[i][0], markers[i][1], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][1], markers[i][2], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][2], markers[i][3], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][3], markers[i][0], cvScalar(255, 0, 0), 2, CV_AA);
+        cv::line(out, markers[i][0], markers[i][1], cv::Scalar(255, 0, 0), 2, cv::LINE_AA);
+        cv::line(out, markers[i][1], markers[i][2], cv::Scalar(255, 0, 0), 2, cv::LINE_AA);
+        cv::line(out, markers[i][2], markers[i][3], cv::Scalar(255, 0, 0), 2, cv::LINE_AA);
+        cv::line(out, markers[i][3], markers[i][0], cv::Scalar(255, 0, 0), 2, cv::LINE_AA);
     }
 }
 /* Attempt to make it faster than in opencv. I could not :( Maybe trying with SSE3...

@@ -134,7 +134,7 @@ int main(int argc, char **argv) {
 
         // Open outputvideo
         if (TheOutVideoFilePath != "")
-            VWriter.open(TheOutVideoFilePath, CV_FOURCC('M', 'J', 'P', 'G'), 15, TheInputImage.size());
+            VWriter.open(TheOutVideoFilePath, VideoWriter::fourcc('M', 'J', 'P', 'G'), 15, TheInputImage.size());
 
         // read camera parameters if passed
         if (TheIntrinsicFile != "") {
@@ -192,9 +192,9 @@ int main(int argc, char **argv) {
                 // first create a small version of the thresholded image
                 cv::Mat smallThres;
                 cv::resize(TheBoardDetector.getMarkerDetector().getThresholdedImage(), smallThres,
-                           cvSize(TheInputImageCopy.cols / 3, TheInputImageCopy.rows / 3));
+                           cv::Size(TheInputImageCopy.cols / 3, TheInputImageCopy.rows / 3));
                 cv::Mat small3C;
-                cv::cvtColor(smallThres, small3C, CV_GRAY2BGR);
+                cv::cvtColor(smallThres, small3C, cv::COLOR_GRAY2BGR);
                 cv::Mat roi = TheInputImageCopy(cv::Rect(0, 0, TheInputImageCopy.cols / 3, TheInputImageCopy.rows / 3));
                 small3C.copyTo(roi);
                 VWriter << TheInputImageCopy;
