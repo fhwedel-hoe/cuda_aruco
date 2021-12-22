@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src ${GNULIBS_INCLUDE_DIR})
 LINK_LIBRARIES(${PROJECT_NAME} ${REQUIRED_LIBRARIES} )
 
 ADD_EXECUTABLE(aruco_test aruco_test.cpp)
+ADD_EXECUTABLE(aruco_test_cpu aruco_test_cpu.cpp)
 ADD_EXECUTABLE(aruco_simple aruco_simple.cpp)
 ADD_EXECUTABLE(aruco_create_marker aruco_create_marker.cpp)
 ADD_EXECUTABLE(aruco_create_board aruco_create_board.cpp)
